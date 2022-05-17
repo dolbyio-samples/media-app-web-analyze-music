@@ -1,4 +1,5 @@
 # Analyzing Media for Loudness and Music Content
+Supliment code for this blog here: https://dolby.io/blog/searching-video-to-find-loudness-and-music-sections-analyze-data/
 
 A demo app for analyzing the music content in a media file.
 
