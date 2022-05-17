@@ -1,0 +1,67 @@
+html {
+	background: linear-gradient(to bottom right, black, #4b1f99);
+	background-size: cover;
+	height: 100%;
+	overflow: scroll;
+	overflow-x: hidden;
+}
+
+body {
+	font-family: "Avenir Next", Tahoma, Geneva, Verdana, sans-serif;
+	text-align: center;
+	padding-top: 5%;
+	background-position: center;
+}
+h1 {
+	color: white;
+}
+div {
+	color: white;
+}
+form {
+	color: white;
+}
+
+#myProgress {
+	width: 100%;
+	background-color: grey;
+	max-width: 500px;
+	outline: black solid 2px;
+	margin: auto;
+}
+
+#myBar {
+	width: 0%;
+	height: 15px;
+	background-color: #06b365;
+	text-align: center;
+	font-weight: 600;
+	color: white;
+	font-size: 10px;
+}
+#fileSize {
+	font-size: smaller;
+	font-family: "Avenir Next", Tahoma, Geneva, Verdana, sans-serif;
+}
+#result_box {
+	visibility: hidden;
+	text-align: center;
+	outline: #4b1f99 solid 2px;
+	padding: 3%;
+	max-width: 60%;
+	position: absolute;
+	left: 20%;
+	right: 20%;
+}
+.topleft {
+	position: absolute;
+	top: 8px;
+	left: 16px;
+	font-size: 18px;
+}
+table,
+td {
+	border: 2px solid white;
+	margin: auto;
+	padding: 15px;
+}

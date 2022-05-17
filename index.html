@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+		<title>Dolby.io Analyze API: Music Data</title>
+		<meta name="description" content="Media Music Composition Detector" />
+		<meta name="author" content="SitePoint" />
+
+		<meta property="og:title" content="Media Music Composition Detector" />
+		<meta property="og:type" content="website" />
+		<meta property="og:description" content="Media Music Composition Detector" />
+		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+		<link rel="stylesheet" href="index.css" />
+	</head>
+
+	<body>
+		<a href="https://docs.dolby.io/media-apis/docs/analyze-api-guide">
+			<img src="img/dolbyio.png" alt="Dolby.io Logo" width="200px" height="100px" class="topleft" />
+		</a>
+		<h1>Dolby.io Analyze API: Music Data</h1>
+
+		<form>
+			<label for="fname"><b>Step 1)</b> Enter Dolby.io Media API Key:</label>
+			<input type="text" id="mAPIKey" class="input_box" /><br /><br />
+		</form>
+
+		<form name="uploadForm">
+			<div>
+				<label for="fname"><b>Step 2)</b> Choose target file:</label>
+				<input id="uploadInput" type="file" name="myFiles" disabled="True" />
+				<div id="fileSize">File Size: <span id="fileSize">0</span></div>
+			</div>
+		</form>
+
+		<div>
+			<br />
+			<button id="myBtn" disabled="True" onclick="startAudioAnalysis()">Start Job</button>
+		</div>
+
+		<br />
+		<div id="myProgress">
+			<div id="myBar"></div>
+		</div>
+
+		<br />
+		<div id="result_box">
+			<b>Results: </b>
+			<p id="percentage_music"></p>
+			<p id="number_of_music_sections"></p>
+			<table id="myTable">
+				<tr>
+					<td><b>Section ID</b></td>
+					<td><b>Music Start (s)</b></td>
+					<td><b>Music End (s)</b></td>
+					<td><b>Loudness (db)</b></td>
+					<td><b>Genre</b></td>
+				</tr>
+			</table>
+		</div>
+
+		<script src="analyze.js"></script>
+	</body>
+</html>
