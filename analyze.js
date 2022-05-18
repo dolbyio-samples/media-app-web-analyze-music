@@ -49,6 +49,12 @@ async function getResults(mAPIKey) {
 		cell5.innerHTML = String(genre);
 	}
 	document.getElementById("myBtn").innerText = "Complete";
+	document.getElementById("download").disabled = false;
+	document.getElementById("download").style.visibility = "visible";
+
+	const a = document.getElementById("downloadLink");
+	const file = new Blob([JSON.stringify(json_loc)], { type: "text/plain" });
+	a.href = URL.createObjectURL(file);
 
 	return json_loc;
 }
@@ -69,11 +75,11 @@ async function checkJobStatus(jobID, mAPIKey) {
 	var elem = document.getElementById("myBar");
 	elem.style.width = result.progress + "%";
 
-	if (result.status == "Failed") {
+	if (result.status == "Failed" || result.status == 401) {
 		console.log("ERROR: Job Failed");
 		const start_button = document.getElementById("myBtn");
 		start_button.innerText = "FAILED!";
-		return null;
+		throw new Error("Job Failed: Check file type and Media API Key");
 	} else if (result.progress != "100") {
 		await delay(3000);
 		checkJobStatus(jobID, mAPIKey);
@@ -184,18 +190,28 @@ async function startAudioAnalysis() {
 	//Starts the audio analysis pipeline:
 	//Upload -> Call job -> Check Job Status - > Get Results
 
-	console.log("Job starting");
-	let selectedFile = document.getElementById("uploadInput");
-	let mAPIKey = document.getElementById("mAPIKey").value;
-	let fileType = selectedFile.value.split(".")[1];
+	try {
+		console.log("Job starting");
+		let selectedFile = document.getElementById("uploadInput");
+		let mAPIKey = document.getElementById("mAPIKey").value;
+		let fileType = selectedFile.value.split(".")[1];
 
-	document.getElementById("myBtn").disabled = true;
-	selectedFile.disabled = true;
+		document.getElementById("myBtn").disabled = true;
+		selectedFile.disabled = true;
 
-	let fileLocation = await Promise.resolve(uploadFile(fileType, mAPIKey).then((results) => results));
-	document.getElementById("myBtn").innerText = "Running...";
-	let jobID = await startJob(fileLocation, mAPIKey).then((results) => results);
-	let results = await checkJobStatus(jobID, mAPIKey).then((results) => results);
+		let fileLocation = await Promise.resolve(uploadFile(fileType, mAPIKey).then((results) => results));
+		document.getElementById("myBtn").innerText = "Running...";
+		let jobID = await startJob(fileLocation, mAPIKey).then((results) => results);
+		let results = await checkJobStatus(jobID, mAPIKey).then((results) => results);
+	} catch {
+		//Reset if something fails
+		document.getElementById("uploadInput").value = null;
+		document.getElementById("mAPIKey").value = null;
+		document.getElementById("myBtn").disabled = false;
+		document.getElementById("myBtn").textContent = "Start Job";
+		document.getElementById("myBtn").disabled = true;
+		document.getElementById("fileSize").innerHTML = "File Size: 0";
+	}
 }
 
 document.getElementById("mAPIKey").addEventListener("change", enableFile, false);

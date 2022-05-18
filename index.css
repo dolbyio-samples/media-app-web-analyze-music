@@ -65,3 +65,6 @@ td {
 	margin: auto;
 	padding: 15px;
 }
+#download{
+	visibility: hidden;
+}
