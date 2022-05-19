@@ -9,3 +9,4 @@ The whole project is built in vanilla JS, so just clone the repo and open the in
 ### Learn More:
 1. [Dolby.io](https://dolby.io/)
 2. [Analyze API](https://docs.dolby.io/media-apis/docs/analyze-api-guide)
+3. [Analyze API_test](https://docs.dby.io/media-apis/docs/analyze-api-guide)
